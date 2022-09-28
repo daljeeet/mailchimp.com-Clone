@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mailchimp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(65, 65, 65);
+        }
+        
+        nav {
+            display: flex;
+            height: 80px;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            width: 100%;
+            margin: auto;
+            position: fixed;
+        }
+        
+        #nav_left {
+            width: 32%;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .nav_mid {
+            display: flex;
+            width: 22%;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .nav_R {
+            display: flex;
+            width: 36%;
+            justify-content: space-between;
+            height: 100%;
+            align-items: center;
+        }
+        
+        #btn_sec {
+            width: 50%;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        button {
+            padding: 14px 24px;
+            border-radius: 20px;
+            border: 1.5px solid black;
+            cursor: pointer;
+            transition-duration: 0.1s;
+        }
+        
+        button:hover {
+            transition-duration: 0.2s;
+            -webkit-transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0px 5px 0px black;
+        }
+        
+        .searchBtn {
+            width: 50px;
+            height: 50px;
+            background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+        }
+        
+         ::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background-color: rgb(195, 195, 195);
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sales {
+            line-height: 20px;
+            text-align: right;
+        }
+        
+        .imgSec {
+            border: 1px solid black;
+            height: 100%;
+            width: 200px;
+        }
+        
+        .dorpdown_content {
+            height: 100vh;
+            width: 100vw;
+            display: none;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+        }
+        
+        .dorpdown_content_inner {
+            padding-left: 30px;
+            width: 40%;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding-left: 80px;
+            padding-bottom: 20px;
+        }
+        
+        .dropright_content {
+            display: none;
+            width: 30%;
+            height: 100%;
+            left: 42%;
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            background-color: white;
+        }
+        
+        .dropright_content_inner {
+            position: relative;
+            width: auto;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            margin: 0px 10px;
+            padding-top: 50px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+        }
+        
+        .dropdown,
+        .drop_right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .dropdown:hover .dorpdown_content {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+        
+        .drop_right:hover .dropright_content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .dorpdown_content_right {
+            width: 60%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.558);
+        }
+        
+        .nav_list {
+            z-index: 20;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .nav_list:hover {
+            text-decoration: underline;
+            color: teal;
+        }
+        
+        .nav_sublink {
+            font-size: 1.5rem;
+            font-weight: 400;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            cursor: pointer;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        
+        .nav_sublink:hover {
+            color: teal;
+        }
+        
+        hr {
+            background-color: grey;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            width: 70%;
+        }
+        
+        .dull {
+            font-size: 0.8rem;
+        }
+        
+        .arrow_link {
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+            align-items: center;
+        }
+        
+        .arrow {
+            font-size: 2.4rem;
+            width: 50px;
+            font-weight: 200;
+            color: grey;
+        }
+        
+        .arrow_link:hover .nav_sublink {
+            color: teal;
+        }
+        
+        .arrow_link:hover .arrow {
+            color: teal;
+        }
+        
+        .static {
+            height: 100px;
+            width: 80%;
+            margin: auto;
+            border-top: 1px solid rgb(0, 0, 0);
+            margin-left: 20px;
+            padding-top: 40px;
+            font-size: 1rem;
+        }
+        
+        .hd_pra {
+            height: 120px;
+            margin: 20px auto;
+            text-decoration: none;
+        }
+        
+        .hd_pra:hover .nav_sublink {
+            color: teal;
+        }
+        
+        .prd_updates {
+            width: 90%;
+        }
+        
+        .prd_heading {
+            margin: 10px 0px;
+        }
+        
+        .prd_desc {
+            margin: 5px 0px;
+            font-size: 0.8rem;
+        }
+        
+        .prd_link {
+            color: teal;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="#navbar">
+        <div id="nav_left">
+            <div class="dropdown">
+                <div class="nav_list" id="prod">Products</div>
+                <div class="dorpdown_content">
+                    <div class="dorpdown_content_inner">
+                        <!-- dorpdown content will be displayed here -->
+                        <p class="dull">WE'LL HELP YOU -</p>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Get Your Business Online</p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+
+                                <p class="nav_sublink">Market Your Business</p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Email</p>
+                                        <p>Engage your audience wtih beautiful, branded emails.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Landing Pages</p>
+                                        <p>Design landing pages that grow your audience and help you sell more stuff.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Digital Ads</p>
+                                        <p>Reach people on Facebook, Instagram, and across the web.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Social Media</p>
+                                        <p>Build your following with targeted ads and organic posting on Facebook, Instagram, and Twitter.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Postcards</p>
+                                        <p>Send printed postcards around the world with the help of our address finder.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="dull">PLATEFORM FEATURS -</p>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+
+                                <p class="nav_sublink">Audience Management</p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Marketing CRM </p>
+                                        <p>Get to know your audience and find new ways to market to them.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Signup Forms</p>
+                                        <p>Grow your audience with a pop-up or embedded form.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Segmentation</p>
+                                        <p>Segment your audience based on shared traits.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Behavioral Targeting</p>
+                                        <p>Target your messages based on people's purchase behavior, app activity, and more.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Predicted Demographics</p>
+                                        <p>Get predictive insights about your contacts so you can personalize your marketing.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Tags & Contact Profiles</p>
+                                        <p>Keep track of what you know about your people with customizable tags.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink"></p>
+                                        <p></p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+
+                                <p class="nav_sublink">Creative Tools </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Content Studio</p>
+                                        <p>Sync, store, and edit all your images and files in one place.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Creative Assistant</p>
+                                        <p>Get beautiful, on-brand designs made for you with the power of AI.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Dynamic Content</p>
+                                        <p>Personalize individual content blocks within your emails.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Subject Line Helper</p>
+                                        <p>Get real-time feedback on how to refine your subject lines.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Campaign Templates</p>
+                                        <p>100+ pre-designed email and landing page templates that fit any message.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+
+                                <p class="nav_sublink">Marketing Automation </p>
+                                <div class="arrow">&#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Customer Journeys</p>
+                                        <p>Design personalized journeys using conditional logic and branching points.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Integrations</p>
+                                        <p>Sync your store data and connect other tools to unlock more automation features.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+
+                                <p class="nav_sublink">Insights & Analytics</p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Reports</p>
+                                        <p>Track sales and campaign performance in easy-to-digest reports.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Smart Recommendations</p>
+                                        <p>Get personalized recommendations to help you make your next move.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">A/B Testing</p>
+                                        <p>Test different versions of a single email to see how small changes can impact your results.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Surveys</p>
+                                        <p>Gauge interest and customer satisfaction by gathering feedback.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Content Optimizer</p>
+                                        <p>Make your email content more engaging with personalized suggestions for improvement.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="dull">NOT SURE WHERE TO START </p>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">What's Right for Me? </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">E-Commerce and Retail</p>
+                                        <p>Drive traffic and boost sales with a marketing platform that seamlessly integrates with your store.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Mobile and Web Apps</p>
+                                        <p>Reach new customers, send behavior‑based campaigns, and increase engagement with your app.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Startups</p>
+                                        <p>Find product‑market fit, learn from user feedback, and launch your first marketing campaigns.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Agencies & Freelancers</p>
+                                        <p>Get perks and tools for managing clients when you join our free community, Mailchimp & Co.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Developers</p>
+                                        <p>Integrate marketing data, send transactional emails, and build integrations using our APIs and documentation</p>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="nav_sublink">Talk To Sales: 2394032390 </div>
+                        <div class="prd_updates">
+                            <h4 class="prd_heading">Product Updates</h4>
+                            <p class="prd_desc">Get the latest on new features, product improvements, and other announcements.</p>
+                            <a class="prd_link" href="">See What's new </a>
+                        </div>
+                    </div>
+                    <div class="dorpdown_content_right"></div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="nav_list" id="Res">Resources</div>
+                <div class="dorpdown_content">
+                    <!-- dorpdown content will be displayed here -->
+                    <div class="dorpdown_content_inner">
+                        <p class="dull">LEARN -</p>
+                        <p class="nav_sublink">Mailchimp 101</p>
+                        <p class="nav_sublink">Help Center</p>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Marketing Library</p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4>COMMUNITY - </h4>
+                        <div class="drop_right d_rght1">
+                            <a href="" class='arrow_link'>
+
+                                <p class="nav_sublink">For Freelances & Agencies</p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right d_rght1">
+                            <a href="" class='arrow_link'>
+
+                                <p class="nav_sublink">For Developers</p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <p class="nav_sublink">Hire A Trusted Partner</p>
+                        <hr>
+                        <p class="nav_sublink">Talk to Sales: +20 39804590234 </p>
+                        <div class="dropdwn_btm">
+                            <h4>App Integrations</h4>
+                            <p>Connect your digital tools so you can do more with your marketing.</p>
+                            <a href="">See all integratioons </a>
+                        </div>
+                    </div>
+                    <div class="dorpdown_content_right"></div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <div class="nav_list" id="insp">Inspriation</div>
+                <div class="dorpdown_content">
+                    <!-- dorpdown content will be displayed here -->
+                    <div class="dorpdown_content_inner">
+                        <div>img Logo</div>
+                        <div class="drop_right">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Podcasts </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right d_rght1">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Seires </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right d_rght1">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Films </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>images & logos </div>
+                        <div class="drop_right d_rght1">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Expert Insights </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right d_rght1">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Industry Trends </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="drop_right d_rght1">
+                            <a href="" class='arrow_link'>
+                                <p class="nav_sublink">Smart Living </p>
+                                <div class="arrow"> &#8250</div>
+                            </a>
+                            <div class="dropright_content">
+                                <!-- dropleftcontent here -->
+                                <div class="dropright_content_inner">
+
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Websites</p>
+                                        <p>Create a free website that comes with build-in marketing tools.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Online Stores</p>
+                                        <p>Launch a store that comes with everything you need to start selling, including maketing tools</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Appointment Scheduling</p>
+                                        <p>Add online scheduling to your website so people book appointments with you.</p>
+                                    </a>
+                                    <a href="" class="hd_pra">
+                                        <p class="nav_sublink">Domains</p>
+                                        <p>Claim a custom domain to make it easy for people to find your brand on the web.</p>
+                                    </a>
+                                </div>
+                                <h2 class="static">
+                                    See Overview ->
+                                </h2>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="nav_sublink">Talk to Sales:+91 302948023984 </p>
+                    </div>
+                    <div class="dorpdown_content_right"></div>
+                </div>
+            </div>
+            <div class="nav_list" id="prc">Pricing</div>
+        </div>
+        <div class="nav_mid">
+            <div class="imgSec"></div>
+        </div>
+        <div class="nav_R">
+            <div class="sales">Sales: <br>+91-58472389 </div>
+            <div class="searchBtn">
+
+            </div>
+            <div id="btn_sec">
+                <button>Log In</button>
+                <button>Sign Up</button>
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>
+<script>
+    let maindiv = document.querySelector('.dorpdown_content_right')
+    maindiv.addEventListener('click', stopblur)
+
+    function stopblur(e) {
+        console.log('hwllo i am clickced')
+    }
+</script>
