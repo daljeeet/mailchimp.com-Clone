@@ -18,6 +18,10 @@
             text-decoration: none;
         }
         
+        a:hover {
+            color: teal;
+        }
+        
         nav {
             display: flex;
             height: 80px;
@@ -94,6 +98,10 @@
             text-align: right;
         }
         
+        .hide_slider {
+            display: none;
+        }
+        
         .imgSec {
             height: 100%;
             width: 200px;
@@ -103,6 +111,7 @@
         }
         
         .imgSec>img {
+            cursor: pointer;
             width: 70%;
         }
         
@@ -123,7 +132,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            padding-left: 80px;
+            padding-left: 25px;
             padding-bottom: 20px;
         }
         
@@ -131,7 +140,7 @@
             display: none;
             width: 30%;
             height: 100%;
-            left: 42%;
+            left: 40%;
             position: absolute;
             top: 0px;
             bottom: 0px;
@@ -179,7 +188,7 @@
         .nav_list {
             z-index: 20;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
         }
         
         .nav_list:hover {
@@ -209,6 +218,7 @@
         
         .dull {
             font-size: 0.8rem;
+            margin-top: 20px;
         }
         
         .arrow_link {
@@ -316,7 +326,7 @@
                                     </a>
                                 </div>
                                 <h2 class="static">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -351,7 +361,7 @@
                                     </a>
                                 </div>
                                 <h2 class="static">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -396,7 +406,7 @@
                                     </a>
                                 </div>
                                 <h2 class="static">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -431,7 +441,7 @@
                                     </a>
                                 </div>
                                 <h2 class="static">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -454,7 +464,7 @@
                                     </a>
                                 </div>
                                 <h2 class="static">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -489,7 +499,7 @@
                                     </a>
                                 </div>
                                 <h2 class="static">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -605,7 +615,7 @@
                                     </a>
                                 </div>
                                 <h2 class="static ">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -867,7 +877,7 @@
                                     </div>
                                 </div>
                                 <h2 class="static ">
-                                    See Overview ->
+                                    See Overview
                                 </h2>
                             </div>
                         </div>
@@ -880,13 +890,13 @@
             <a class="nav_list " id="prc ">Pricing</a>
         </div>
         <div class="nav_mid ">
-            <div class="imgSec ">
+            <a class="imgSec ">
                 <img src="/Navbar/images/4bdd8f340000640005063338-198x149-1x.jpg " alt=" ">
-            </div>
+            </a>
         </div>
         <div class="nav_R ">
-            <div class="sales ">Sales: <br>+91-58472389 </div>
-            <div class="searchBtn "></div>
+            <a href=" " class="sales ">Sales: <br>+91-58472389 </a>
+            <a href=" " class="searchBtn "></a>
             <div id="btn_sec ">
                 <button>Log In</button>
                 <button>Sign Up</button>
@@ -898,9 +908,9 @@
 </html>
 <script>
     let maindiv = document.querySelector('.dorpdown_content_right')
-    maindiv.addEventListener('click', stopblur)
-
-    function stopblur(e) {
-        console.log('hwllo i am clickced')
+    maindiv.addEventListener("click ", stopEvent, false)
+    function stopEvent(e) {
+        let slider =  e.target.parentNode;
+        e.stopPropagation();
     }
 </script>
