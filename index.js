@@ -8,3 +8,4 @@ let loginBtn = document.querySelector('.login_button')
             location.href = 'pricing.html'
         })
     })
+    
