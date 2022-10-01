@@ -15,7 +15,7 @@
 .pricing_table {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 250px;
+    grid-template-rows: 300px;
 }
 
 .pricing_table>a {
@@ -53,7 +53,7 @@
 }
 
 .pricing_table_mob>a {
-    border: 2px solid gray;
+    border: 1px solid gray;
     border-right: none;
     border-bottom: none;
     padding: 40px 30px;
@@ -63,12 +63,12 @@
     background-color: white;
 }
 
-.pricing_table_mob>div:last-child {
-    border: 2px solid gray;
+.pricing_table_mob>a:last-child {
+    border: 1px solid gray;
     border-bottom: none;
 }
 
-.pricing_table_mob>div>h2 {
+.pricing_table_mob>a>h2 {
     font-size: 2.2rem;
     font-weight: 500;
 }
