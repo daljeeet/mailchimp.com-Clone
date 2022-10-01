@@ -1012,25 +1012,6 @@
 
 </html>
 <script>
-    let faque = document.querySelectorAll('.faq_que')
-    faque.forEach(function(element, index) {
-        element.children[0].addEventListener('click', function() {
-            showHide(element, index)
-        })
-    })
-
-    function showHide(e, i) {
-        let anstoggle = e.children[1]
-        if (anstoggle.className == 'hide') {
-            anstoggle.className = 'show'
-            e.children[0].children[1].innerText = '➖'
-        } else {
-            anstoggle.className = 'hide'
-            e.children[0].children[1].innerText = '➕'
-        }
-    }
-
-
     document.addEventListener('scroll', scrolling);
 
     let fixed = document.querySelector('.hide_price')
