@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - Mailchimp</title>
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+
+<body>
+    <div class="signup_page_main">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/mnky.png" alt="">
+            </a>
+        </div>
+        <div class="form">
+            <div>
+                <h2 class="signup_heading">Log In</h2>
+                <p>Need a Mailchimp account ? <span><a href="signup.html">Create an account</a></span> </p>
+                <form>
+                    <label for="userName">Username</label>
+                    <input type="text" id="username">
+                    <label for="password">Password</label>
+                    <input type="text" id="password">
+                    <label for="checkbox">
+                    <input class="checkbox" type="checkbox">
+                   Keep me logged in</label>
+                    <input type="submit" value='Log In'>
+                </form>
+            </div>
+        </div>
+        <div class="aside">
+            <img src="/images/loginImg.png" alt="">
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    let userDetails = JSON.parse(localStorage.getItem('signup-details'))
+
+    let username = document.querySelector('#username')
+    let passwrd = document.querySelector('#password');
+    userDetails.forEach(function(element, index) {
+        if (elem.username === username.value && elem.password == passwrd.value) {
+            alert('log-in successful !')
+
+        } else {
+            alert('invalid crediantials.')
+        }
+    })
+</script>

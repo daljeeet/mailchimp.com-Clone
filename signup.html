@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signu Up Mailchimp</title>
+    <link rel="stylesheet" href="styles/signup.css">
+</head>
+
+<body>
+    <div class="signup_page_main">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/mnky.png" alt="">
+            </a>
+        </div>
+        <div class="form">
+            <div>
+                <h2 class="signup_heading">Sign up for Mailchimp</h2>
+                <p>Create a free account or <span><a href="login.html">Log in</a></span> </p>
+                <form>
+                    <label for="email">Email
+                    </label>
+                    <input type="email" id="email">
+                    <label for="userName">Username</label>
+                    <input type="text" id="username">
+                    <label for="password">Password</label>
+                    <input type="text" id="password">
+                    <label for="checkbox">
+                    <input class="checkbox" type="checkbox">
+                    I don't want to recieve emails about Mailchimp and related intuit product and feature updates, marketing best practices, and promotions from mailchimp.</label>
+                    <input type="submit" value='Sign Up'>
+                </form>
+            </div>
+        </div>
+        <div class="aside">
+            <img src="/images/plant.png" alt="">
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let form = document.querySelector('form');
+    form.addEventListener('submit', signup)
+    let emailVal = document.querySelector('#email')
+    let user = document.querySelector('#username')
+    let pass = document.querySelector('#password')
+    let signupArr = JSON.parse(localStorage.getItem('signup-details')) || []
+
+    function signup(e) {
+        e.preventDefault()
+        if (emailVal.value == '' || user.value == '' || pass.value == '') {
+            alert('please fill all the details');
+        } else {
+            let signupObj = {
+                email: emailVal.value,
+                username: user.value,
+                password: pass.value
+            }
+            signupArr.push(signupObj)
+            localStorage.setItem('signup-details', JSON.stringify(signupArr))
+            alert('Sign-up Success, go to Log-in page to continue')
+            location.href = 'login.html'
+        }
+    }
+</script>
