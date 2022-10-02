@@ -30,36 +30,53 @@ let loginBtn = document.querySelector('.login_button')
         element.addEventListener('mouseover',function(){
             mouseOver(element,index)
         })
-        element.addEventListener('mouseout',function(){
-            mouseOut(element,index)
-        })
     })
+
     let dropdown = document.querySelectorAll('.dorpdown_content')
     function mouseOver(e,i){
         dropdown.forEach(function(elem,ind){
-        if(i===ind){
-            let lists = elem.children[0].childNodes;
-            lists.forEach(function(a,b){
-                if(a.className==='drop_right'){
-                    a.addEventListener('mouseover',function(){toggleRight(a,b)})
+            if(i===ind){
+                elem.children[1].addEventListener('mouseover',function(){
+                    hideIt(elem,e)
+                } )
+                elem.style.display='inherit'
+                let rightCont = elem.children[0].children
+                for(let node of rightCont){
+                    if(node.className==='drop_right'){
+                       node.addEventListener('mouseover',function dropRight(){
+                        node.children[1].style.display = 'flex'
+                       }
+                       )
+                       node.addEventListener('mouseout',function hideRight(){
+                        node.children[1].style.display = 'none'
+                       } )
+                    }
                 }
-            })
-            elem.children[1].addEventListener('mouseover',function(){
-                hideIt(elem)
-            } )
-            e.style.color = 'teal'
-            elem.style.display='inherit'
+               
         }else{
             elem.style.display ='none'
         }
     })
     }
-        function mouseOut(e,i){
-        // e.style.display='none'
-    }
     function hideIt(el,e){
         el.style.display = 'none'
+        e.style.color = 'black'
     }
-    function toggleRight(a,b){
-        console.log(a.childNodes)
-    }
+
+
+   let hamberger = document.querySelector('#hamIcon');
+   let nav = document.querySelector('nav')
+   let hambClose = document.querySelector('#hamIconClose');
+   let backArrow = document.querySelector('.backArrow')
+   hamberger.addEventListener('click',shoNav)
+   function shoNav(){
+    nav.className= 'nav_show'
+    hamberger.style.display = 'none'
+    hambClose.style.display = 'flex'
+   }
+   hambClose.addEventListener('click', closeNav );
+   function closeNav(){
+    nav.className = 'nav_hide'
+    hamberger.style.display = 'flex'
+    hambClose.style.display = 'none'
+   }

@@ -15,7 +15,7 @@
 .pricing_table {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 300px;
+    grid-template-rows: auto;
 }
 
 .pricing_table>a {
@@ -50,6 +50,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 450px;
+    width: 100%;
 }
 
 .pricing_table_mob>a {
@@ -93,6 +94,13 @@
 .pricing_detials_mob>div>p {
     font-weight: 500;
     padding: 10px 30px;
+    height: 40px;
+}
+
+.pricing_detials_mob>div>a {
+    font-weight: 500;
+    padding: 10px 30px;
+    height: 40px;
 }
 
 .pricing_detials_mob>div:first-child>a {
@@ -102,7 +110,7 @@
 }
 
 .pricing_detials_mob>div:first-child>a:nth-child(even) {
-    background-color: rgb(255, 245, 227);
+    background-color: rgb(241, 241, 241);
 }
 
 .pricing_detials_mob>div:first-child {
@@ -111,7 +119,7 @@
 }
 
 .pricing_detials_mob>div>p:nth-child(even) {
-    background-color: rgb(255, 245, 227);
+    background-color: rgb(241, 241, 241);
 }
 
 .abc {
@@ -212,4 +220,108 @@
 
 .hide {
     display: none;
+}
+
+@media screen and (min-width:570px) and (max-width:960px) {
+     ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    .pricing_table_mob {
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto;
+        overflow-y: auto;
+    }
+    .pricing_table_mob>a {
+        width: 140px;
+    }
+    .pricing_table {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto;
+        overflow-y: auto;
+    }
+    .pricing_table>a {
+        border: 1px solid grey;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 25px;
+        width: 150px;
+    }
+    .pricing_mid_div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .pricing_mid_div>div {
+        margin-bottom: 80px;
+        border: none;
+        width: 80%;
+    }
+    .pricing_mid_div>div:first-child {
+        border: none;
+    }
+    .pricing_detials_mob {
+        overflow-y: auto;
+    }
+    .pricing_detials_mob>div {
+        border-right: 1px solid grey;
+        border-bottom: 1px solid grey;
+        width: 200px;
+    }
+}
+
+@media screen and (min-width:100px) and (max-width:570px) {
+     ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    .pricing_table_mob {
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto;
+        overflow-y: auto;
+    }
+    .pricing_table_mob>a {
+        width: 100px;
+    }
+    .pricing_table {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto;
+        overflow-y: auto;
+    }
+    .pricing_table>a {
+        border: 1px solid grey;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 25px;
+        width: 110px;
+    }
+    .pricing_mid_div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .pricing_mid_div>div {
+        margin-bottom: 80px;
+        border: none;
+        width: 100%;
+    }
+    .pricing_mid_div>div:first-child {
+        border: none;
+    }
+    .pricing_detials_mob {
+        overflow-y: auto;
+    }
+    .pricing_detials_mob>div {
+        border-right: 1px solid grey;
+        border-bottom: 1px solid grey;
+        width: 160px;
+    }
 }

@@ -1,22 +1,20 @@
 .signup_page_main {
     height: auto;
     display: flex;
-    height: 100vh;
-    overflow: hidden;
+    align-items: center;
+    background-image: url('../images/loginImg.png');
+    justify-content: center;
+    border: 2px solid blue;
 }
 
 .form {
-    width: 40%;
+    padding: 30px;
+    width: 60%;
     height: 100%;
     margin: 100px auto;
     display: flex;
     flex-direction: column;
-}
-
-.form>div {
-    width: 70%;
-    margin: auto;
-    padding: 20px;
+    background-color: white;
 }
 
 .signup_heading {
@@ -24,26 +22,19 @@
     font-weight: 500;
 }
 
-.form>div>p {
+.form>p {
     font-size: 1.5rem;
 }
 
-.aside {
-    width: 70%;
-    background-color: yellow;
-    z-index: 10;
-    height: 100vh;
-}
-
-.aside>img {
-    width: 100%;
-}
-
 form {
-    width: 100%;
+    width: 80%;
+    margin: 20px auto;
     height: 60%;
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    padding: 20px;
 }
 
 form>input {
@@ -64,5 +55,23 @@ form>input:last-child {
     color: white;
     border: none;
     cursor: pointer;
-    height: 70px;
+    height: 60px;
+}
+
+.logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+@media screen and (min-width:570px) and (max-width:960px) {
+    .form {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width:100px) and (max-width:570px) {
+    .form {
+        width: 90%;
+    }
 }

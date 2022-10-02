@@ -17,23 +17,18 @@
             </a>
         </div>
         <div class="form">
-            <div>
-                <h2 class="signup_heading">Log In</h2>
-                <p>Need a Mailchimp account ? <span><a href="signup.html">Create an account</a></span> </p>
-                <form>
-                    <label for="userName">Username</label>
-                    <input type="text" id="username">
-                    <label for="password">Password</label>
-                    <input type="text" id="password">
-                    <label for="checkbox">
+            <h2 class="signup_heading">Log In</h2>
+            <p>Need a Mailchimp account ? <span><a href="signup.html">Create an account</a></span> </p>
+            <form>
+                <label for="userName">Username</label>
+                <input type="text" id="username">
+                <label for="password">Password</label>
+                <input type="text" id="password">
+                <label for="checkbox">
                     <input class="checkbox" type="checkbox">
                    Keep me logged in</label>
-                    <input type="submit" value='Log In'>
-                </form>
-            </div>
-        </div>
-        <div class="aside">
-            <img src="/images/loginImg.png" alt="">
+                <input type="submit" value='Log In'>
+            </form>
         </div>
     </div>
 
@@ -41,16 +36,23 @@
 
 </html>
 <script>
-    let userDetails = JSON.parse(localStorage.getItem('signup-details'))
+    let userDetails = JSON.parse(localStorage.getItem('signup-details')) || []
 
     let username = document.querySelector('#username')
     let passwrd = document.querySelector('#password');
-    userDetails.forEach(function(element, index) {
-        if (elem.username === username.value && elem.password == passwrd.value) {
-            alert('log-in successful !')
+    let Login = document.querySelector('form');
 
-        } else {
-            alert('invalid crediantials.')
+    userDetails.forEach(function(element, index) {
+        Login.addEventListener('submit', logIn)
+
+        function logIn(e) {
+            e.preventDefault()
+            if (element.username === username.value && element.password == passwrd.value) {
+                alert('log-in successful !')
+
+            } else {
+                alert('invalid crediantials.')
+            }
         }
     })
 </script>
