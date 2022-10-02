@@ -11,6 +11,7 @@
     display: flex;
     margin-top: 50px;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .footer_top_section>div {
@@ -71,6 +72,86 @@
     justify-content: space-around;
 }
 
+.image_section_footer_bottom>div:first-child {
+    display: flex;
+    height: 100px;
+    width: 50%;
+    align-items: center;
+}
+
+.image_section_footer_bottom>div:last-child {
+    align-items: center;
+    display: flex;
+    height: 100px;
+    width: 50%;
+}
+
+.image_section_footer_bottom>div:last-child>a>img {
+    width: 150%;
+}
+
 .detail_footer_bottom {
     width: 30%;
+}
+
+@media screen and (min-width:570px) and (max-width:960px) {
+    .image_section_footer_bottom>div:first-child {
+        display: flex;
+        flex-direction: column;
+        height: 100px;
+        width: 40%;
+    }
+    .image_section_footer_bottom>div:last-child {
+        display: flex;
+        align-items: center;
+        height: 100px;
+        width: 60%;
+    }
+    .image_section_footer_bottom>div:last-child>a>img {
+        width: 150%;
+    }
+    .footer_mid_section {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width:100px) and (max-width:570px) {
+    .image_section_footer_bottom {
+        margin: 30px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .image_section_footer_bottom>div:first-child {
+        display: flex;
+        margin: auto;
+        height: 100px;
+        width: 80%;
+    }
+    .image_section_footer_bottom>div:last-child {
+        display: flex;
+        align-items: center;
+        height: 100px;
+        width: 80%;
+        margin: auto;
+    }
+    .image_section_footer_bottom>div:last-child>a>img {
+        width: 150%;
+    }
+    .footer_mid_section {
+        width: 80%;
+        align-items: center;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer_bottom_section {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+    .footer_bottom_section>div {
+        width: 90%;
+        margin: 20px auto;
+    }
 }
